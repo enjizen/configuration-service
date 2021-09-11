@@ -8,7 +8,7 @@ VOLUME /tmp
 EXPOSE 8006
 
 # Set application's JAR file
-ARG JAR_FILE=target/configuration-service-0.0.1.jar
+ARG JAR_FILE=target/configuration-service-0.2.0.jar
 
 # Add the application's JAR file to the container
 ADD ${JAR_FILE} app.jar
