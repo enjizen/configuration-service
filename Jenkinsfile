@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -7,20 +8,16 @@ pipeline {
 
     stages {
         stage('Build') {
-                   steps {
-                       sh 'mvn -DskipTests clean package'
-                   }
-         }
-         stage('Test') {
-                     steps {
-                         sh 'mvn test'
-                     }
-                    post {
-                            success {
-                                junit '**/target/surefire-reports/TEST-*.xml'
-                                    archiveArtifacts 'target/*.jar'
-                                 }
-                        }
-                 }
+            steps {
+                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+
+            post {
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
+            }
+        }
     }
 }
